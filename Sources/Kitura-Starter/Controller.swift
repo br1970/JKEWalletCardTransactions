@@ -61,20 +61,11 @@ public class Controller {
     Log.debug("POST - /hello route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
     if let jsonResponse = try request.readString() {
-       
-    	var json: Array!
-		do {
-  			json = try NSJSONSerialization.JSONObjectWithData(jsonResponse, options: NSJSONReadingOptions()) as? Array
-		} catch {
-		print(error)
-		}
-		
-		guard let item = json[0] as? [String: AnyObject],
-  		let firstName = item["firstName"] as? [String: AnyObject],
-  		let lastName = item["lastNmae"] as? [String: AnyObject] else {
-		    return;
-		}
-      
+    	
+    	let json = JSON(data: jsonResponse)
+    	let firstName = json[0]["firstName"].string
+    	let lastName = json[0]["lastName"].string
+     
       try response.status(.OK).send("Hello \(firstName) \(lastName), from Kitura-Starter!").end()
     } else {
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
