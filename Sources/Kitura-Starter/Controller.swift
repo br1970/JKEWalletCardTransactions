@@ -61,7 +61,7 @@ public class Controller {
     Log.debug("POST - /hello route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
 
-    try if let data = request.readString()?.dataUsingEncoding(String.Encoding.utf8){
+    if let data = try request.readString()?.data(usingEncoding: String.Encoding.utf8){
     	
     	let item = JSON(data:data)
     	let firstName = item["firstName"].stringValue
