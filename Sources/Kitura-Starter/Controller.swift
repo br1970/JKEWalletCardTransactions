@@ -75,7 +75,7 @@ public class Controller {
 		    return;
 		}
       
-      try response.status(.OK).send("Hello \(firstName) + " " + \(lastName), from Kitura-Starter!").end()
+      try response.status(.OK).send("Hello \(firstName) \(lastName), from Kitura-Starter!").end()
     } else {
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
     }
