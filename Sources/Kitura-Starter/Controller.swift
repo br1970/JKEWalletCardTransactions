@@ -60,9 +60,9 @@ public class Controller {
   public func postHello(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
     Log.debug("POST - /hello route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
-    if let jsonResponse = try request.readString() {
+    if let jsonResponse = try request.readString() as? Data {
     	
-    	let json = JSON(data: jsonResponse)
+    	let json = JSON(jsonResponse)
     	let firstName = json[0]["firstName"].string
     	let lastName = json[0]["lastName"].string
      
