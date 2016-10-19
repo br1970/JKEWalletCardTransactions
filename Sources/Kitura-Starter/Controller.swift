@@ -61,7 +61,7 @@ public class Controller {
     Log.debug("POST - /hello route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
     if let name = try request.readString() {
-      try response.status(.OK).send("Hello \(name), from Kitura-Starter!").end()
+      try response.status(.OK).send("Hello \(x), from Kitura-Starter!").end()
     } else {
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
     }
