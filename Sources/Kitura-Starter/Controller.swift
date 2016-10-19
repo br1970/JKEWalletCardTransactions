@@ -60,7 +60,8 @@ public class Controller {
   public func postHello(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
     Log.debug("POST - /hello route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
-    if let data = request.readString().dataUsingEncoding(String.Encoding.utf8){
+
+    try if let data = request.readString()?.dataUsingEncoding(String.Encoding.utf8){
     	
     	let item = JSON(data:data)
     	let firstName = item["firstName"].stringValue
