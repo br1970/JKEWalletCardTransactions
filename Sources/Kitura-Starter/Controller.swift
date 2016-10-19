@@ -60,8 +60,22 @@ public class Controller {
   public func postHello(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
     Log.debug("POST - /hello route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
-    if let name = try request.readString() {
-      try response.status(.OK).send("Hello \(x), from Kitura-Starter!").end()
+    if let jsonResponse = try request.readString() {
+       
+    	var json: Array!
+		do {
+  			json = try NSJSONSerialization.JSONObjectWithData(jsonResponse, options: NSJSONReadingOptions()) as? Array
+		} catch {
+		print(error)
+		}
+		
+		guard let item = json[0] as? [String: AnyObject],
+  		let firstName = item["firstName"] as? [String: AnyObject],
+  		let lastName = item["lastNmae"] as? [String: AnyObject] else {
+		    return;
+		}
+      
+      try response.status(.OK).send("Hello \(firstName) + " " + \(lastName), from Kitura-Starter!").end()
     } else {
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
     }
