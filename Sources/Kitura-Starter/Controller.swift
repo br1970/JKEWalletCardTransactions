@@ -60,11 +60,11 @@ public class Controller {
   public func postHello(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
     Log.debug("POST - /hello route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
-    if let jsonResponse = try request.readString() as? Data {
+    if let data = request.readString().dataUsingEncoding(String.Encoding.utf8){
     	
-    	let json = JSON(jsonResponse)
-    	let firstName = json[0]["firstName"].string
-    	let lastName = json[0]["lastName"].string
+    	let item = JSON(data:data)
+    	let firstName = item["firstName"].stringValue
+    	let lastName = item["lastName"].stringValue
      
       try response.status(.OK).send("Hello \(firstName) \(lastName), from Kitura-Starter!").end()
     } else {
