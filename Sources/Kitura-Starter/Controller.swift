@@ -58,7 +58,7 @@ public class Controller {
     Log.debug("POST - /runSale route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
 
-    if let data = try request.readString()?.data(using: String.Encoding.utf8){
+    //if let data = try request.readString()?.data(using: String.Encoding.utf8){
     	
     	//let item = JSON(data:data)
     	//let cardNumber = item["cardNumber"].stringValue
@@ -88,11 +88,11 @@ public class Controller {
     Log.debug("POST - /hello route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
 
-    if let data = try request.readString()?.data(using: String.Encoding.utf8){
+    //if let data = try request.readString()?.data(using: String.Encoding.utf8){
     	
-    	let item = JSON(data:data)
-    	let firstName = item["firstName"].stringValue
-    	let lastName = item["lastName"].stringValue
+    	//let item = JSON(data:data)
+    	//let firstName = item["firstName"].stringValue
+    	//let lastName = item["lastName"].stringValue
      
       try response.status(.OK).send(try request.readString()!).end()
     } else {
