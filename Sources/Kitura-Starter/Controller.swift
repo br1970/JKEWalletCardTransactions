@@ -60,14 +60,13 @@ public class Controller {
 
     if let data = try request.readString()?.data(using: String.Encoding.utf8){
     	
-    	let item = JSON(data:data)
-    	let cardNumber = item["cardNumber"].stringValue
-    	let cardExp = item["cardExp"].stringValue
-    	let cardExp = item["cardExp"].stringValue
-   		let cardCode = item["cardCode"].stringValue
-   		let transAmount = item["transAmount"].stringValue
-   		let transDescription = item["transDescription"].stringValue
-    	let transInvoiceNumber = item["transInvoiceNumber"].stringValue
+    	//let item = JSON(data:data)
+    	//let cardNumber = item["cardNumber"].stringValue
+    	//let cardExp = item["cardExp"].stringValue
+   		//let cardCode = item["cardCode"].stringValue
+   		//let transAmount = item["transAmount"].stringValue
+   		//let transDescription = item["transDescription"].stringValue
+    	//let transInvoiceNumber = item["transInvoiceNumber"].stringValue
 
 		
 
@@ -95,7 +94,7 @@ public class Controller {
     	let firstName = item["firstName"].stringValue
     	let lastName = item["lastName"].stringValue
      
-      try response.status(.OK).send(try request.readString()?).end()
+      try response.status(.OK).send(try request.readString()!).end()
     } else {
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
     }
