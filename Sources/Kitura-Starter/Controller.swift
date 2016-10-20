@@ -72,8 +72,8 @@ public class Controller {
     	
     	let scriptUrl = "https://api.us.apiconnect.ibmcloud.com/balduinousibmcom-development/runSale"
         let urlWithParams = scriptUrl + "?cardNumber=\(cardNumber)&cardExp=\(cardExp)&cardCode=\(cardCode)&transAmount=\(transAmount)&transDescription=\(transDescription)&transInvoiceNumber=\(transInvoiceNumber)"
-        let myUrl = NSURL(string: urlWithParams)        
-        let request = NSMutableURLRequest(url: myUrl! as URL)
+        let myUrl = URL(string: urlWithParams)        
+        let request = URLRequest(url: myUrl!)
        	request.HTTPMethod = "POST"
     	request.addValue("d95b7289-f8b2-43e9-a7c4-da48294b64f1", forHTTPHeaderField: "X-IBM-Client-Id")
     	
