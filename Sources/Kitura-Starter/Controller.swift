@@ -116,7 +116,7 @@ public class Controller {
                     .response {
   						request, response, data, error in
   						
-        				try response!.status(.OK).send(data).end()       				
+        				try response!.status(HTTPStatusCode.OK).send(data).end()       				
  						
 					}
        	
@@ -125,7 +125,7 @@ public class Controller {
 
 
     } else {
-      try response.status(.OK).send("Kitura-Starter received a POST request!").end()
+      try response.status(HTTPStatusCode.OK).send("Kitura-Starter received a POST request!").end()
     }
   }
 
