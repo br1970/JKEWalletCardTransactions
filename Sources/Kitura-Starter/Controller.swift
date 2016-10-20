@@ -105,12 +105,20 @@ public class Controller {
 
         */
        
+       let parameters: Parameters = ["cardCode":cardCode, "cardExp":cardExp, "cardNumber":cardNumber, "transAmount":transAmount, "transDescription":transDescription, "transInvoiceNumber":transInvoiceNumber]
+       
        KituraRequest.request(.POST,
-                      https://api.us.apiconnect.ibmcloud.com/balduinousibmcom-development/runSale",
-                      parameters: ["cardCode":cardCode, "cardExp":cardExp, "cardNumber":cardNumber,
-                					"transAmount":transAmount, "transDescription":transDescription, "transInvoiceNumber":transInvoiceNumber],
-                      encoding: JSONEncoding.default,
-                      headers: ["":""])
+                      		 "https://api.us.apiconnect.ibmcloud.com/balduinousibmcom-development/runSale",
+                   		   	 parameters: parameters,
+                      		 encoding: JSONEncoding.default,
+                      		 headers: ["X-IBM-Client-Id":"d95b7289-f8b2-43e9-a7c4-da48294b64f1"])
+                      
+                    .response {
+  						request, response, data, error in
+  						
+        				try response.status(.OK).send(data).end()       				
+ 						
+					}
        	
        	//try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()//      				try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()       				
  
