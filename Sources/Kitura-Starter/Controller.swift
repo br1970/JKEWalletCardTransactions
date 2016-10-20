@@ -77,10 +77,10 @@ public class Controller {
        	request.httpMethod = "POST"
     	request.addValue("d95b7289-f8b2-43e9-a7c4-da48294b64f1", forHTTPHeaderField: "X-IBM-Client-Id")
     	
+        do {
         // Excute HTTP Request
-        let task = try URLSession.shared.dataTask(with: request) {
+        let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
-            
             // Check for error
             if error != nil
             {
@@ -111,6 +111,10 @@ public class Controller {
             }
 */            
        		try response.status(.OK).send(responseString).end()
+   	  	  } catch let error as NSError {
+   	  			print(error.localizedDescription)
+   	      }
+
         }
         
        task.resume()
