@@ -114,9 +114,9 @@ public class Controller {
                       		 headers: ["X-IBM-Client-Id":"d95b7289-f8b2-43e9-a7c4-da48294b64f1"])
                       
                     .response {
-  						request, response1, data, error in
+  						request1, response1, data1, error1 in
   						
-  						let json = JSON(data: data)
+  						let json = JSON(data: data1)
 						//if let resp = json[0].string {
 
         					try response.status(.OK).send(json).end()       				
