@@ -116,7 +116,7 @@ public class Controller {
                     .response {
   						request, response1, data, error in
   						
-        				try response.status(.OK).send(data).end()       				
+        					try response.status(.OK).send(data.value).end()       				
  						
 					}
        	
