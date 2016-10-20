@@ -79,7 +79,7 @@ public class Controller {
     	
         do {
 	        // Excute HTTP Request
-	        let task = URLSession.shared().dataTask(with: request) {
+	        let task = URLSession.shared.dataTask(with: request as URLRequest) {
 	            data, response, error in
 	            // Check for error
 	            if error != nil
@@ -97,7 +97,7 @@ public class Controller {
 	   	  	  
 			task.resume()
 			
-  	  	  } catch let error as NSError {
+  	  	  } catch let error as Error {
    	  			print(error.localizedDescription)
    	      }
 
