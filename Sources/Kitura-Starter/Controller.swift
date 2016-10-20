@@ -118,7 +118,7 @@ public class Controller {
   						
   						do {
   						
-	  						let json = JSON(data: data1)
+	  						let json = JSON(data: data1!)
 							if let resp = json[0].string {
 	
 	        					try response.status(.OK).send(json).end()       				
