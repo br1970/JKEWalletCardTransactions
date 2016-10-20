@@ -73,13 +73,12 @@ public class Controller {
     	let scriptUrl = "https://api.us.apiconnect.ibmcloud.com/balduinousibmcom-development/runSale"
         let urlWithParams = scriptUrl + "?cardNumber=\(cardNumber)&cardExp=\(cardExp)&cardCode=\(cardCode)&transAmount=\(transAmount)&transDescription=\(transDescription)&transInvoiceNumber=\(transInvoiceNumber)"
         let myUrl = URL(string: urlWithParams)        
-        let request = URLRequest(url: myUrl!)
-       	request.HTTPMethod = "POST"
+        var request = URLRequest(url: myUrl!)
+       	request.httpMethod = "POST"
     	request.addValue("d95b7289-f8b2-43e9-a7c4-da48294b64f1", forHTTPHeaderField: "X-IBM-Client-Id")
     	
- 
         // Excute HTTP Request
-        let task = URLSession.sharedSession().dataTaskWithRequest(request) {
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
             
             // Check for error
