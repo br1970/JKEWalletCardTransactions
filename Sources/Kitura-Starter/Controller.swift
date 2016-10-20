@@ -49,8 +49,36 @@ public class Controller {
 
     // JSON Get request
     router.get("/json", handler: getJSON)
+    
+    // usaepay request
+    router.post("/runSale" handler: runSale)
   }
 
+  public func runSale(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
+    Log.debug("POST - /runSale route handler...")
+    response.headers["Content-Type"] = "text/plain; charset=utf-8"
+
+    if let data = try request.readString()?.data(using: String.Encoding.utf8){
+    	
+    	let item = JSON(data:data)
+    	let cardNumber = item["cardNumber"].stringValue
+    	let cardExp = item["cardExp"].stringValue
+    	let cardExp = item["cardExp"].stringValue
+   		let cardCode = item["cardCode"].stringValue
+   		let transAmount = item["transAmount"].stringValue
+   		let transDescription = item["transDescription"].stringValue
+    	let transInvoiceNumber = item["transInvoiceNumber"].stringValue
+
+		
+
+
+      	try response.status(.OK).send("Hello \(firstName) \(lastName), from Kitura-Starter!").end()
+    } else {
+      try response.status(.OK).send("Kitura-Starter received a POST request!").end()
+    }
+  }
+
+  
   public func getHello(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
     Log.debug("GET - /hello route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
@@ -67,7 +95,7 @@ public class Controller {
     	let firstName = item["firstName"].stringValue
     	let lastName = item["lastName"].stringValue
      
-      try response.status(.OK).send("Hello \(firstName) \(lastName), from Kitura-Starter!").end()
+      try response.status(.OK).send(data).end()
     } else {
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
     }
