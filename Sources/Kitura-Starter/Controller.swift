@@ -51,7 +51,7 @@ public class Controller {
     router.get("/json", handler: getJSON)
     
     // usaepay request
-    router.post("/runSale" handler: runSale)
+    router.post("/runSale", handler: runSale)
   }
 
   public func runSale(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
@@ -72,7 +72,7 @@ public class Controller {
 		
 
 
-      	try response.status(.OK).send("Hello \(firstName) \(lastName), from Kitura-Starter!").end()
+      	try response.status(.OK).send("Return the JSON response from usaepay here").end()
     } else {
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
     }
@@ -95,7 +95,7 @@ public class Controller {
     	let firstName = item["firstName"].stringValue
     	let lastName = item["lastName"].stringValue
      
-      try response.status(.OK).send(data).end()
+      try response.status(.OK).send(try request.readString()?).end()
     } else {
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
     }
