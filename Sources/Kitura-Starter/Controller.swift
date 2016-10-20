@@ -78,7 +78,7 @@ public class Controller {
     	request.addValue("d95b7289-f8b2-43e9-a7c4-da48294b64f1", forHTTPHeaderField: "X-IBM-Client-Id")
     	
         // Excute HTTP Request
-        let task = URLSession.shared.dataTask(with: request) {
+        let task = try URLSession.shared.dataTask(with: request) {
             data, response, error in
             
             // Check for error
