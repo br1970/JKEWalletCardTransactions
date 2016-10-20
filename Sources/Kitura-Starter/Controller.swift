@@ -79,7 +79,7 @@ public class Controller {
     	
         do {
 	        // Excute HTTP Request
-	        let task = URLSession.shared.dataTask(with: request) {
+	        let task = URLSession.shared().dataTask(with: request) {
 	            data, response, error in
 	            // Check for error
 	            if error != nil
@@ -95,12 +95,13 @@ public class Controller {
 	       		try response.status(.OK).send(responseString).end()
 	          }
 	   	  	  
-   	  	  } catch let error as NSError {
+			task.resume()
+			
+  	  	  } catch let error as NSError {
    	  			print(error.localizedDescription)
    	      }
 
         
-       task.resume()
        	
        	//try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()//      				try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()       				
  
