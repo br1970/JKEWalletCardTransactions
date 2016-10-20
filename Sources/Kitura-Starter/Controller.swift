@@ -18,6 +18,7 @@ import Kitura
 import SwiftyJSON
 import LoggerAPI
 import CloudFoundryEnv
+import Alamofire
 
 public class Controller {
 
@@ -68,7 +69,21 @@ public class Controller {
    		let transDescription = item["transDescription"].stringValue
     	let transInvoiceNumber = item["transInvoiceNumber"].stringValue
     	
-      	try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()
+    	let headers = ["X-IBM-Client-Id": "d95b7289-f8b2-43e9-a7c4-da48294b64f1"]
+        
+        Alamofire.request(  .POST,
+                            "https://api.us.apiconnect.ibmcloud.com/balduinousibmcom-development/runSale",
+                            parameters: ["cardCode":cardCode, "cardExp":cardExp, "cardNumber":cardNumber,
+										 "transAmount":transAmount, "transDescription":transDescription, "transInvoiceNumber":transInvoiceNumber],
+                            encoding: .JSON,
+                            headers: headers)
+                            
+                 .responseJSON { jsonResponse in
+                    print(jsonResponse)
+       				
+       				try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()
+//      				try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()
+                }
     } else {
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
     }
