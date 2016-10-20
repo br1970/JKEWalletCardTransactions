@@ -114,9 +114,9 @@ public class Controller {
                       		 headers: ["X-IBM-Client-Id":"d95b7289-f8b2-43e9-a7c4-da48294b64f1"])
                       
                     .response {
-  						request, response, data, error in
+  						request, response1, data, error in
   						
-        				try response?.status(.OK).send(data).end()       				
+        				try response.status(.OK).send(data).end()       				
  						
 					}
        	
