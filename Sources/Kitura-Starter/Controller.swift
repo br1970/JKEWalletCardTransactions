@@ -99,7 +99,7 @@ public class Controller {
 	   	  	  
 			task.resume()
 			
-  	  	  } catch let error as Error {
+  	  	  } catch let error as NSError {
    	  			print(error.localizedDescription)
    	      }
 
@@ -116,11 +116,18 @@ public class Controller {
                     .response {
   						request1, response1, data1, error1 in
   						
-  						//let json = JSON(data: data1)
-						//if let resp = json[0].string {
+  						do {
+  						
+	  						let json = JSON(data: data1)
+							if let resp = json[0].string {
+	
+	        					try response.status(.OK).send(json).end()       				
+	 						}
+	 						
+ 						} catch let error as NSError {
+   	  						print(error.localizedDescription)
+   	      				}
 
-        					//try response.status(.OK).send(json).end()       				
- 						//}
 					}
        	
        	//try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()//      				try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()       				
