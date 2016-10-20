@@ -19,6 +19,8 @@ import SwiftyJSON
 import LoggerAPI
 import CloudFoundryEnv
 import Foundation
+import KituraRequest
+
 
 public class Controller {
 
@@ -69,7 +71,7 @@ public class Controller {
    		let transDescription = item["transDescription"].stringValue
     	let transInvoiceNumber = item["transInvoiceNumber"].stringValue
     	
-    	
+    	/*
     	let scriptUrl = "https://api.us.apiconnect.ibmcloud.com/balduinousibmcom-development/runSale"
         let urlWithParams = scriptUrl + "?cardNumber=\(cardNumber)&cardExp=\(cardExp)&cardCode=\(cardCode)&transAmount=\(transAmount)&transDescription=\(transDescription)&transInvoiceNumber=\(transInvoiceNumber)"
         let myUrl = URL(string: urlWithParams)        
@@ -101,7 +103,14 @@ public class Controller {
    	  			print(error.localizedDescription)
    	      }
 
-        
+        */
+       
+       KituraRequest.request(.POST,
+                      https://api.us.apiconnect.ibmcloud.com/balduinousibmcom-development/runSale",
+                      parameters: ["cardCode":cardCode, "cardExp":cardExp, "cardNumber":cardNumber,
+                					"transAmount":transAmount, "transDescription":transDescription, "transInvoiceNumber":transInvoiceNumber],
+                      encoding: JSONEncoding.default,
+                      headers: ["":""])
        	
        	//try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()//      				try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()       				
  
