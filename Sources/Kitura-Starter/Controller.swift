@@ -116,8 +116,11 @@ public class Controller {
                     .response {
   						request, response1, data, error in
   						
-        					try response.status(.OK).send(data.value).end()       				
- 						
+  						let json = JSON(data: data)
+						if let resp = json[0].string {
+
+        					try response.status(.OK).send(resp).end()       				
+ 						}
 					}
        	
        	//try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()//      				try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()       				
