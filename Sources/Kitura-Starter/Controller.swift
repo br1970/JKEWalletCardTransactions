@@ -121,7 +121,7 @@ public class Controller {
 	  						let json = JSON(data: data1!)
 							if let resp = json[0].string {
 	
-	        					try response.status(.OK).send(json).end()       				
+	        					try response.status(.OK).send(resp).end()       				
 	 						}
 	 						
  						} catch let error as NSError {
