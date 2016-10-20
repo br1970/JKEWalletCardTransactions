@@ -78,44 +78,27 @@ public class Controller {
     	request.addValue("d95b7289-f8b2-43e9-a7c4-da48294b64f1", forHTTPHeaderField: "X-IBM-Client-Id")
     	
         do {
-        // Excute HTTP Request
-        let task = URLSession.shared.dataTask(with: request) {
-            data, response, error in
-            // Check for error
-            if error != nil
-            {
-                print("error=\(error)")
-                try response.status(.OK).send("error=\(error)").end()
-            }
-            
-            // Print out response string
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("responseString = \(responseString)")
-            
-/*            
-            // Convert server json response to NSDictionary
-            do {
-                if let convertedJsonIntoDict = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary {
-                    
-                    // Print out dictionary
-                    print(convertedJsonIntoDict)
-                    
-                    // Get value by key
-                    let firstNameValue = convertedJsonIntoDict["userName"] as? String
-                    print(firstNameValue!)
-                    
-                }
-
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-*/            
-       		try response.status(.OK).send(responseString).end()
+	        // Excute HTTP Request
+	        let task = URLSession.shared.dataTask(with: request) {
+	            data, response, error in
+	            // Check for error
+	            if error != nil
+	            {
+	                print("error=\(error)")
+	                try response.status(.OK).send("error=\(error)").end()
+	            }
+	            
+	            // Print out response string
+	            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+	            print("responseString = \(responseString)")
+	           
+	       		try response.status(.OK).send(responseString).end()
+	          }
+	   	  	  
    	  	  } catch let error as NSError {
    	  			print(error.localizedDescription)
    	      }
 
-        }
         
        task.resume()
        	
