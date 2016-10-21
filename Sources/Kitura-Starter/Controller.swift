@@ -124,7 +124,7 @@ public class Controller {
 	  						Log.info("Before if let resp = json.string")
 	  						Log.info("json is \(json)")	  						
 							
-							if let resp = json.string {
+							if let resp = json[].string {
 								
 								Log.info("Response is \(resp)")
 	
