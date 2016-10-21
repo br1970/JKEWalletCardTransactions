@@ -119,7 +119,11 @@ public class Controller {
   						Log.info("Entered response callback")
   						do {
   						
+	  						Log.info("Before let json = JSON(data: data1!)")
 	  						let json = JSON(data: data1!)
+	  						Log.info("Before if let resp = json.string")
+	  						Log.info("json is \(json)")	  						
+							
 							if let resp = json.string {
 								
 								Log.info("Response is \(resp)")
