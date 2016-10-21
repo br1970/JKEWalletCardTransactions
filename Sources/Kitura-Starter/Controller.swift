@@ -105,7 +105,7 @@ public class Controller {
 
         */
        
-       let parameters = ["cardCode":cardCode, "cardExp":cardExp, "cardNumber":cardNumber, "transAmount":transAmount, "transDescription":transDescription, "transInvoiceNumber":transInvoiceNumber]
+       let parameters = ["cardCode":cardCode, "cardExpiration":cardExp, "cardNumber":cardNumber, "transAmount":transAmount, "transDescription":transDescription, "transInvoice":transInvoiceNumber]
        
        KituraRequest.request(.POST,
                       		 "https://api.us.apiconnect.ibmcloud.com/balduinousibmcom-development/runSale",
