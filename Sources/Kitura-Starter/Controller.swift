@@ -58,7 +58,7 @@ public class Controller {
   }
 
   public func runSale(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
-    Log.info("POST - /runSale route handler...")
+
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
 
     if let data = try request.readString()?.data(using: String.Encoding.utf8){
@@ -70,41 +70,7 @@ public class Controller {
    		let transAmount = item["transAmount"].stringValue
    		let transDescription = item["transDescription"].stringValue
     	let transInvoiceNumber = item["transInvoiceNumber"].stringValue
-    	
-    	/*
-    	let scriptUrl = "https://api.us.apiconnect.ibmcloud.com/balduinousibmcom-development/runSale"
-        let urlWithParams = scriptUrl + "?cardNumber=\(cardNumber)&cardExp=\(cardExp)&cardCode=\(cardCode)&transAmount=\(transAmount)&transDescription=\(transDescription)&transInvoiceNumber=\(transInvoiceNumber)"
-        let myUrl = URL(string: urlWithParams)        
-        var request = URLRequest(url: myUrl!)
-       	request.httpMethod = "POST"
-    	request.addValue("d95b7289-f8b2-43e9-a7c4-da48294b64f1", forHTTPHeaderField: "X-IBM-Client-Id")
-    	
-        do {
-	        // Excute HTTP Request
-	        let task = URLSession.shared.dataTask(with: request as URLRequest) {
-	            data, response, error in
-	            // Check for error
-	            if error != nil
-	            {
-	                print("error=\(error)")
-	                try response.status(.OK).send("error=\(error)").end()
-	            }
-	            
-	            // Print out response string
-	            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-	            print("responseString = \(responseString)")
-	           
-	       		try response.status(.OK).send(responseString).end()
-	          }
-	   	  	  
-			task.resume()
-			
-  	  	  } catch let error as NSError {
-   	  			print(error.localizedDescription)
-   	      }
-
-        */
-       
+    	       
        let parameters = ["cardCode":cardCode, "cardExpiration":cardExp, "cardNumber":cardNumber, "transAmount":transAmount, "transDescription":transDescription, "transInvoice":transInvoiceNumber]
        
        KituraRequest.request(.POST,
@@ -116,18 +82,11 @@ public class Controller {
                     .response {
   						request1, response1, data1, error1 in
   						
-  						Log.info("Entered response callback")
   						do {
   						
-	  						Log.info("Before let json = JSON(data: data1!)")
-	  						let json = JSON(data: data1!)
-	  						Log.info("Before if let resp = json.string")
-	  						Log.info("json is \(json)")	  						
-							
+	  						let json = JSON(data: data1!)							
 							if let resp = json.rawString() {
 								
-								Log.info("Response is \(resp)")
-	
 	        					try response.status(.OK).send(resp).end()       				
 	 						}
 	 						
@@ -137,13 +96,9 @@ public class Controller {
    	      				}
 
 					}
-       	
-       	//try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()//      				try response.status(.OK).send("{\"cardNumber\":\"\(cardNumber)\", \"cardExp\":\"\(cardExp)\", \"cardCode\":\"\(cardCode)\", \"transAmount\":\"\(transAmount)\", \"transDescription\": \"\(transDescription)\", \"transInvoiceNumber\":\"\(transInvoiceNumber)\"}").end()       				
  
 
-
     } else {
-      Log.info("Went through without processing response")
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
     }
   }
