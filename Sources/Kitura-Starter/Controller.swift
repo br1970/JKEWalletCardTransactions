@@ -58,7 +58,7 @@ public class Controller {
   }
 
   public func runSale(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
-    Log.debug("POST - /runSale route handler...")
+    Log.info("POST - /runSale route handler...")
     response.headers["Content-Type"] = "text/plain; charset=utf-8"
 
     if let data = try request.readString()?.data(using: String.Encoding.utf8){
@@ -116,15 +116,19 @@ public class Controller {
                     .response {
   						request1, response1, data1, error1 in
   						
+  						Log.info("Entered response callback")
   						do {
   						
 	  						let json = JSON(data: data1!)
 							if let resp = json[0].string {
+								
+								Log.info("Response is \(resp)")
 	
 	        					try response.status(.OK).send(resp).end()       				
 	 						}
 	 						
  						} catch let error as NSError {
+   	  						Log.info("Error: \(error.localizedDescription)")
    	  						print(error.localizedDescription)
    	      				}
 
@@ -135,6 +139,7 @@ public class Controller {
 
 
     } else {
+      Log.info("Went through without processing response")
       try response.status(.OK).send("Kitura-Starter received a POST request!").end()
     }
   }
