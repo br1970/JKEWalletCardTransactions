@@ -120,7 +120,7 @@ public class Controller {
   						do {
   						
 	  						let json = JSON(data: data1!)
-							if let resp = json[0].string {
+							if let resp = json.string {
 								
 								Log.info("Response is \(resp)")
 	
