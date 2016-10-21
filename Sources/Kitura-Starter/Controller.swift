@@ -110,7 +110,7 @@ public class Controller {
        KituraRequest.request(.POST,
                       		 "https://api.us.apiconnect.ibmcloud.com/balduinousibmcom-development/runSale",
                    		   	 parameters: parameters,
-                      		 encoding: URLEncoding.defaul,
+                      		 encoding: URLEncoding.default,
                       		 headers: ["X-IBM-Client-Id":"d95b7289-f8b2-43e9-a7c4-da48294b64f1"])
                       
                     .response {
